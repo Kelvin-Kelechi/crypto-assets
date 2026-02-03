@@ -33,3 +33,10 @@ export interface CryptoAsset {
     price: number[];
   };
 }
+
+export type Theme = 'dark' | 'light';
+
+export interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+}
