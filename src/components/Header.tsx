@@ -93,7 +93,6 @@ export const Header = ({ searchTerm, onSearchChange }: HeaderProps) => {
                   }}
                   whileFocus={{
                     scale: 1.01,
-                    backgroundColor: "rgba(255, 255, 255, 1)",
                     transition: { duration: 0.2 },
                   }}
                 />
