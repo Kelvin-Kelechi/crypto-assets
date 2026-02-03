@@ -1,4 +1,4 @@
-import { createContext, useContext, useLayoutEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light';
 
@@ -20,16 +20,16 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     return 'dark';
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const root = window.document.documentElement;
     
-    // Remove both to ensure clean state
-    root.classList.remove('light', 'dark');
-    
+    // Explicitly handle class toggling for Tailwind
     if (theme === 'dark') {
       root.classList.add('dark');
+      root.classList.remove('light');
       root.style.colorScheme = 'dark';
     } else {
+      root.classList.remove('dark');
       root.classList.add('light');
       root.style.colorScheme = 'light';
     }
