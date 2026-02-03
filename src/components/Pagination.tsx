@@ -55,13 +55,13 @@ export const Pagination = ({
         <ChevronLeft className="w-5 h-5" />
       </button>
 
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-1 sm:gap-1.5">
         {getPageNumbers().map((page, index) => (
           <button
             key={index}
             onClick={() => typeof page === "number" && onPageChange(page)}
             disabled={page === "..."}
-            className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg text-sm font-semibold transition-transform duration-200 ${
+            className={`min-w-[32px] h-8 sm:min-w-[40px] sm:h-10 flex items-center justify-center rounded-lg text-xs sm:text-sm font-semibold transition-transform duration-200 ${
               page === currentPage
                 ? "bg-green-600 dark:bg-green-500 text-white shadow-lg shadow-green-500/30 scale-105"
                 : page === "..."
