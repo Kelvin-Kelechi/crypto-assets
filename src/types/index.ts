@@ -29,4 +29,7 @@ export interface CryptoAsset {
     percentage: number;
   };
   last_updated: string;
+  sparkline_in_7d?: {
+    price: number[];
+  };
 }

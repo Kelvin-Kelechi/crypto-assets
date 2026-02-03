@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react';
+import { Search, Sparkles } from "lucide-react";
 
 interface HeaderProps {
   searchTerm: string;
@@ -7,21 +7,29 @@ interface HeaderProps {
 
 export const Header = ({ searchTerm, onSearchChange }: HeaderProps) => {
   return (
-    <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
-      <div className="max-w-3xl mx-auto px-4 py-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Crypto Tracker
-          </h1>
-          
-          <div className="relative w-full sm:w-64">
+    <div className="sticky top-0 z-50 transition-all duration-200">
+      {/* Blurry background backdrop */}
+      <div className="absolute inset-0 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-sm" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 relative">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <div className="bg-gradient-to-tr from-blue-600 to-purple-600 p-2 rounded-lg text-white shadow-lg shadow-blue-500/30">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <h1 className="text-2xl font-black bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent tracking-tight">
+              Crypto<span className="text-blue-600">Assets</span>
+            </h1>
+          </div>
+
+          <div className="relative w-full md:w-96 group">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-4 w-4 text-gray-400" />
+              <Search className="h-4 w-4 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
             </div>
             <input
               type="text"
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150 ease-in-out"
-              placeholder="Search assets..."
+              className="block w-full pl-10 pr-4 py-2.5 bg-gray-100/50 border border-gray-200 rounded-xl leading-5 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 sm:text-sm shadow-inner"
+              placeholder="Search by name or symbol..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
             />
