@@ -10,7 +10,7 @@ export const ThemeToggle = () => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={toggleTheme}
-      className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors shadow-sm border border-gray-200 dark:border-gray-700"
+      className="relative z-50 p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors shadow-sm border border-gray-200 dark:border-gray-700 active:scale-95"
       aria-label="Toggle theme"
     >
       {theme === "dark" ? (

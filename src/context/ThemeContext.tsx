@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useLayoutEffect, useState } from 'react';
 
-type Theme = "dark" | "light";
+type Theme = 'dark' | 'light';
 
 interface ThemeContextType {
   theme: Theme;
@@ -12,31 +12,33 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     // Check local storage or system preference, default to dark
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme") as Theme;
-      if (savedTheme) return savedTheme;
-      return "dark"; // Default to dark as requested
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme') as Theme;
+      if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+      return 'dark'; // Default to dark as requested
     }
-    return "dark";
+    return 'dark';
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = window.document.documentElement;
-
-    // Explicitly handle class toggling for Tailwind
-    if (theme === "dark") {
-      root.classList.add("dark");
-      root.classList.remove("light");
+    
+    // Remove both to ensure clean state
+    root.classList.remove('light', 'dark');
+    
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.style.colorScheme = 'dark';
     } else {
-      root.classList.remove("dark");
-      root.classList.add("light");
+      root.classList.add('light');
+      root.style.colorScheme = 'light';
     }
-
-    localStorage.setItem("theme", theme);
+    
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
   return (
