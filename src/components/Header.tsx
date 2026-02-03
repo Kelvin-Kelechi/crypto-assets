@@ -1,6 +1,8 @@
-import { Search, Sparkles } from "lucide-react";
+import { Search, Sparkles, TrendingUp } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { useCryptoData } from "../hooks/useCryptoData";
 
 interface HeaderProps {
   searchTerm: string;
@@ -8,6 +10,35 @@ interface HeaderProps {
 }
 
 export const Header = ({ searchTerm, onSearchChange }: HeaderProps) => {
+  const { data } = useCryptoData();
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Filter suggestions based on search term
+  const suggestions = data
+    .filter(
+      (asset) =>
+        searchTerm &&
+        (asset.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          asset.symbol.toLowerCase().includes(searchTerm.toLowerCase())),
+    )
+    .slice(0, 5);
+
   return (
     <div className="sticky top-0 z-50">
       {/* Blurry background backdrop */}
@@ -26,16 +57,16 @@ export const Header = ({ searchTerm, onSearchChange }: HeaderProps) => {
           </div>
 
           <div className="flex items-center gap-4 w-full md:w-auto">
-            <div className="relative w-full md:w-96 group">
+            <div className="relative w-full md:w-96 group" ref={searchRef}>
               <motion.div
                 initial={false}
                 animate={{
-                  scale: searchTerm ? 1.02 : 1,
-                  boxShadow: searchTerm
+                  scale: showSuggestions ? 1.02 : 1,
+                  boxShadow: showSuggestions
                     ? "0 0 0 2px rgba(34, 197, 94, 0.2)"
                     : "none",
                 }}
-                className="relative rounded-xl overflow-hidden"
+                className="relative rounded-xl overflow-visible z-20"
               >
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                   <motion.div
@@ -55,13 +86,68 @@ export const Header = ({ searchTerm, onSearchChange }: HeaderProps) => {
                   className="block w-full pl-10 pr-4 py-2.5 bg-gray-100/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl leading-5 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:bg-white dark:focus:bg-gray-800 focus:border-green-500 dark:focus:border-green-400 sm:text-sm shadow-inner transition-colors duration-200"
                   placeholder="Search by name or symbol..."
                   value={searchTerm}
-                  onChange={(e) => onSearchChange(e.target.value)}
+                  onFocus={() => setShowSuggestions(true)}
+                  onChange={(e) => {
+                    onSearchChange(e.target.value);
+                    setShowSuggestions(true);
+                  }}
                   whileFocus={{
                     scale: 1.01,
                     backgroundColor: "rgba(255, 255, 255, 1)",
                     transition: { duration: 0.2 },
                   }}
                 />
+
+                {/* Auto-suggestions Dropdown */}
+                <AnimatePresence>
+                  {showSuggestions && searchTerm && suggestions.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
+                    >
+                      <div className="py-2">
+                        {suggestions.map((asset) => (
+                          <button
+                            key={asset.id}
+                            onClick={() => {
+                              onSearchChange(asset.name);
+                              setShowSuggestions(false);
+                            }}
+                            className="w-full text-left px-4 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center justify-between group transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <img
+                                src={asset.image}
+                                alt={asset.name}
+                                className="w-6 h-6 rounded-full"
+                              />
+                              <div>
+                                <span className="font-medium text-gray-900 dark:text-gray-100 block">
+                                  {asset.name}
+                                </span>
+                                <span className="text-xs text-gray-500 dark:text-gray-400 uppercase">
+                                  {asset.symbol}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                              <span>
+                                ${asset.current_price.toLocaleString()}
+                              </span>
+                              <TrendingUp
+                                className={`w-3 h-3 ${asset.price_change_percentage_24h >= 0 ? "text-green-500" : "text-red-500"}`}
+                              />
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
                 {/* Animated gradient border effect when searching */}
                 {searchTerm && (
                   <motion.div
