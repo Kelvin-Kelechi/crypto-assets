@@ -1,74 +1,102 @@
-# React + TypeScript + Vite
+# Crypto Assets Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-performance web application for tracking cryptocurrency assets. Built with React, TypeScript, and Tailwind CSS, featuring a beautiful glassmorphism UI with smooth animations and comprehensive dark mode support.
 
-Currently, two official plugins are available:
+## 🌟 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Real-time Data**: Fetches live cryptocurrency data from CoinGecko API.
+- **Modern UI/UX**: 
+  - Glassmorphism design language
+  - Smooth Framer Motion animations
+  - Responsive grid layout (Mobile to Desktop)
+  - Interactive hover effects
+- **Advanced Search**: 
+  - Real-time filtering
+  - Smart auto-suggestions dropdown
+  - Adaptive styling for both themes
+- **Theme System**: 
+  - **Dark Mode (Default)**: Deep emerald/gray aesthetics
+  - **Light Mode**: Clean, crisp white/green theme
+  - **Immediate Switching**: Zero-latency theme toggling
+  - **System Sync**: Respects system preferences
+- **Performance**:
+  - Efficient pagination
+  - Optimized re-renders
+  - Lazy loading for images
+  - Fast Refresh compatible architecture
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: [React 18](https://reactjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Data Source**: [CoinGecko Public API](https://www.coingecko.com/en/api)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js (v14.0.0 or later)
+- npm or yarn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/crypto-assets.git
+   cd crypto-assets
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+### Building for Production
+
+To create a production-ready build:
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The output will be in the `dist` directory.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📂 Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
-# crypto-assets
+src/
+├── api/            # API services and fetch logic
+├── assets/         # Static assets (images, svg)
+├── components/     # Reusable UI components
+│   ├── CryptoItem.tsx
+│   ├── Header.tsx
+│   ├── Pagination.tsx
+│   ├── ThemeToggle.tsx
+│   └── ...
+├── context/        # Global state (ThemeContext)
+├── hooks/          # Custom React hooks (useCryptoData, useTheme)
+├── types/          # TypeScript interfaces and types
+├── App.tsx         # Main application layout
+└── main.tsx        # Application entry point
+```
+
+## 🎨 Design System
+
+- **Colors**: Primary Emerald/Green palette
+- **Typography**: Sans-serif (Inter/System UI)
+- **Effects**: Backdrop blur, soft shadows, gradient accents
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
