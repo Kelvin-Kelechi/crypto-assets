@@ -49,7 +49,7 @@ export const Pagination = ({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 rounded-lg bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm border border-white/20 dark:border-white/10"
+        className="p-2 rounded-lg bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 ease-in-out shadow-sm border border-white/20 dark:border-white/10"
         aria-label="Previous page"
       >
         <ChevronLeft className="w-5 h-5" />
@@ -61,7 +61,7 @@ export const Pagination = ({
             key={index}
             onClick={() => typeof page === "number" && onPageChange(page)}
             disabled={page === "..."}
-            className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg text-sm font-semibold transition-all duration-200 ${
+            className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out ${
               page === currentPage
                 ? "bg-green-600 dark:bg-green-500 text-white shadow-lg shadow-green-500/30 scale-105"
                 : page === "..."
@@ -77,7 +77,7 @@ export const Pagination = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 rounded-lg bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm border border-white/20 dark:border-white/10"
+        className="p-2 rounded-lg bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 ease-in-out shadow-sm border border-white/20 dark:border-white/10"
         aria-label="Next page"
       >
         <ChevronRight className="w-5 h-5" />

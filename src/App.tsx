@@ -40,12 +40,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 font-sans selection:bg-green-100 dark:selection:bg-green-900 selection:text-green-900 dark:selection:text-green-100 transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-gray-950 font-sans selection:bg-green-100 dark:selection:bg-green-900 selection:text-green-900 dark:selection:text-green-100 transition-colors duration-300 ease-in-out">
       {/* Abstract Background Pattern */}
-      <div className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 opacity-60 dark:opacity-20">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-50 via-white to-white dark:from-green-950 dark:via-gray-950 dark:to-gray-950" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-100/40 dark:bg-emerald-900/20 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-100/40 dark:bg-green-900/20 rounded-full blur-[100px]" />
+      <div className="fixed inset-0 z-0 pointer-events-none transition-all duration-300 ease-in-out opacity-60 dark:opacity-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-50 via-white to-white dark:from-green-950 dark:via-gray-950 dark:to-gray-950 transition-colors duration-300 ease-in-out" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-100/40 dark:bg-emerald-900/20 rounded-full blur-[100px] transition-colors duration-300 ease-in-out" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-100/40 dark:bg-green-900/20 rounded-full blur-[100px] transition-colors duration-300 ease-in-out" />
       </div>
 
       <Header searchTerm={searchTerm} onSearchChange={setSearchTerm} />
