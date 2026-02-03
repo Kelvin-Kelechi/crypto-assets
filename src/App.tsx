@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useCryptoData } from "./hooks/useCryptoData";
 import { CryptoItem } from "./components/CryptoItem";
 import { Loading } from "./components/Loading";
@@ -14,10 +14,10 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Reset to first page when search changes
-  useEffect(() => {
+  const handleSearchChange = (value: string) => {
+    setSearchTerm(value);
     setCurrentPage(1);
-  }, [searchTerm]);
+  };
 
   const filteredData = useMemo(() => {
     return data.filter(
@@ -48,7 +48,7 @@ function App() {
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-100/40 dark:bg-green-900/20 rounded-full blur-[100px]" />
       </div>
 
-      <Header searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
 
       <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {loading ? (

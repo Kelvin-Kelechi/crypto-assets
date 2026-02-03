@@ -1,5 +1,6 @@
 import { Search, Sparkles } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { motion } from "framer-motion";
 
 interface HeaderProps {
   searchTerm: string;
@@ -26,16 +27,54 @@ export const Header = ({ searchTerm, onSearchChange }: HeaderProps) => {
 
           <div className="flex items-center gap-4 w-full md:w-auto">
             <div className="relative w-full md:w-96 group">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-4 w-4 text-gray-400 group-focus-within:text-green-500 dark:group-focus-within:text-green-400" />
-              </div>
-              <input
-                type="text"
-                className="block w-full pl-10 pr-4 py-2.5 bg-gray-100/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl leading-5 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:bg-white dark:focus:bg-gray-800 focus:ring-2 focus:ring-green-500/20 dark:focus:ring-green-400/20 focus:border-green-500 dark:focus:border-green-400 sm:text-sm shadow-inner"
-                placeholder="Search by name or symbol..."
-                value={searchTerm}
-                onChange={(e) => onSearchChange(e.target.value)}
-              />
+              <motion.div
+                initial={false}
+                animate={{
+                  scale: searchTerm ? 1.02 : 1,
+                  boxShadow: searchTerm
+                    ? "0 0 0 2px rgba(34, 197, 94, 0.2)"
+                    : "none",
+                }}
+                className="relative rounded-xl overflow-hidden"
+              >
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                  <motion.div
+                    animate={{
+                      rotate: searchTerm ? [0, -10, 10, -10, 0] : 0,
+                      scale: searchTerm ? 1.1 : 1,
+                      color: searchTerm ? "#16a34a" : "#9ca3af",
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Search className="h-4 w-4" />
+                  </motion.div>
+                </div>
+                <motion.input
+                  layout
+                  type="text"
+                  className="block w-full pl-10 pr-4 py-2.5 bg-gray-100/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl leading-5 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:bg-white dark:focus:bg-gray-800 focus:border-green-500 dark:focus:border-green-400 sm:text-sm shadow-inner transition-colors duration-200"
+                  placeholder="Search by name or symbol..."
+                  value={searchTerm}
+                  onChange={(e) => onSearchChange(e.target.value)}
+                  whileFocus={{
+                    scale: 1.01,
+                    backgroundColor: "rgba(255, 255, 255, 1)",
+                    transition: { duration: 0.2 },
+                  }}
+                />
+                {/* Animated gradient border effect when searching */}
+                {searchTerm && (
+                  <motion.div
+                    layoutId="search-glow"
+                    className="absolute inset-0 rounded-xl pointer-events-none"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-400/20 to-emerald-400/20 animate-pulse" />
+                  </motion.div>
+                )}
+              </motion.div>
             </div>
             <ThemeToggle />
           </div>
