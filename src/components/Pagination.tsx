@@ -63,10 +63,10 @@ export const Pagination = ({
             disabled={page === "..."}
             className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg text-sm font-semibold transition-all duration-200 ${
               page === currentPage
-                ? "bg-blue-600 dark:bg-blue-500 text-white shadow-lg shadow-blue-500/30 scale-105"
+                ? "bg-green-600 dark:bg-green-500 text-white shadow-lg shadow-green-500/30 scale-105"
                 : page === "..."
                   ? "cursor-default text-gray-400 dark:text-gray-500 bg-transparent"
-                  : "bg-white/50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 border border-white/20 dark:border-white/10 shadow-sm"
+                  : "bg-white/50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800 hover:text-green-600 dark:hover:text-green-400 border border-white/20 dark:border-white/10 shadow-sm"
             }`}
           >
             {page}

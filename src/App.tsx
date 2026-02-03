@@ -40,12 +40,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-blue-900 dark:selection:text-blue-100 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 font-sans selection:bg-green-100 dark:selection:bg-green-900 selection:text-green-900 dark:selection:text-green-100 transition-colors duration-300">
       {/* Abstract Background Pattern */}
       <div className="fixed inset-0 z-0 opacity-40 dark:opacity-20 pointer-events-none transition-opacity duration-300">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100 via-gray-50 to-white dark:from-blue-950 dark:via-gray-950 dark:to-gray-950" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-100 via-gray-50 to-white dark:from-green-950 dark:via-gray-950 dark:to-gray-950" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-200/30 dark:bg-emerald-900/20 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-200/30 dark:bg-green-900/20 rounded-full blur-[100px]" />
       </div>
 
       <Header searchTerm={searchTerm} onSearchChange={setSearchTerm} />
@@ -91,7 +91,7 @@ function App() {
                 </div>
                 <button
                   onClick={() => setSearchTerm("")}
-                  className="mt-4 text-blue-600 hover:text-blue-700 font-medium"
+                  className="mt-4 text-green-600 hover:text-green-700 font-medium"
                 >
                   Clear Search
                 </button>
